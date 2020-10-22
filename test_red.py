@@ -1,0 +1,18 @@
+import cv2
+import numpy as np
+frame = cv2.imread('b.png')
+hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+lower_red = np.array([156,43,46]) 
+upper_red = np.array([180, 255, 255])
+mask = cv2.inRange(hsv, lower_red, upper_red)
+kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (3,3))
+res = cv2.bitwise_and(frame,frame, mask= mask)
+hole=res.copy()
+filledEdgesOut=cv2.add(res,hole)
+closing = cv2.morphologyEx(filledEdgesOut, cv2.MORPH_CLOSE, kernel, iterations=2)
+closing = cv2.cvtColor(closing, cv2.COLOR_BGR2GRAY)
+cv2.imshow('frame',frame) 
+cv2.imshow('mask',mask)
+cv2.imshow('res',res)
+cv2.imshow('closing', closing)
+cv2.waitKey(0)
