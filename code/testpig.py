@@ -13,13 +13,15 @@ import img_tool as imt
 import greenplane_reddot as gprd
 import pointcloud as pc
 import removebg_pig as rbgp
-filename="24c1"
+filename="23c1"
 debug=False
 camera=filename[-2:]
 red=[]
 rec=[]
 tfr=[]
-rw.readallframes("/Users/percychien/Desktop/project/pig-main/test/"+filename+".bag",0,100,red,rec,tfr )
+path="Users/percychien/Desktop/project/pig-main/test/"
+#path="D:/data/ALLBAG/view_three/"
+rw.readallframes(path+filename+".bag",0,100,red,rec,tfr )
 print("finish read")
 
 def save(x):

@@ -39,15 +39,7 @@ def non_zero_mean(frames):
     arr=np.asarray(frames)
     avg=np.sum(arr,axis=0)/np.sum( arr!=0 ,axis=0)
     return np.nan_to_num(avg,0)
-def remove_bad_point(points):
-    re=[]
-    npoint=points[:,0:3]
-    avg=np.average(npoint,axis=0)
-    tf=np.linalg.norm(npoint-avg,axis=1)<500
-    for i in range(len(tf)):
-        if(tf[i]):
-            re.append(points[i])
-    return np.asarray(re)
+
 def PCA(data, correlation = False, sort = True):
     mean = np.mean(data, axis=0)
     data_adjust = data - mean
@@ -75,7 +67,9 @@ def best_fitting_plane(points):
     return (point, normal , a, b, c, d)
 def findvec(gpmask,reddot,depth,picture,debug=False):
     points=rw.savetopointcloud("test.ply",gpmask*depth,picture,re=True)
-   
+    print("len before remove",len(points))
+    points=remove_bad_point(points)
+    print("len after remove",len(points))
     point,Normalvector,a,b,c,d=best_fitting_plane(points[:,0:3])
     if(Normalvector[2]<0):
         Normalvector=-Normalvector

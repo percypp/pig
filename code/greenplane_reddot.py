@@ -103,10 +103,12 @@ def find_green_plane_red_dot(gpfilter,rdfilter,p,debug=True):
     img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
     print(img.shape)
     
-    
-    cv2.imshow('My Image ori',cv2.cvtColor(p, cv2.COLOR_RGB2BGR))
-    cv2.imshow('My Image mask',img)
-    cv2.imshow('My Image mask2',drawing)
+    if(debug):
+        cv2.imshow('My Image ori',cv2.cvtColor(p, cv2.COLOR_RGB2BGR))
+        cv2.imshow('My Image mask',img)
+        cv2.imshow('My Image mask2',drawing)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
 
     return (gplane,redDot)
 

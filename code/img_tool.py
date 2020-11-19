@@ -21,7 +21,7 @@ def red_mask(cframe):
     newp=cframe.astype(np.float)
     truecolor=np.asarray([[[1,0.2,0.2]]])
     newp=newp*newp
-    mask=(np.sum((newp*truecolor),axis=2)/np.sqrt(np.sum(newp*newp,axis=2)*np.sum(truecolor*truecolor,axis=2)))>0.9
+    mask=(np.sum((newp*truecolor),axis=2)/np.sqrt(np.sum(newp*newp,axis=2)*np.sum(truecolor*truecolor,axis=2)))>0.8
     mask2=(np.sum(cframe,axis=2)>20)
     return np.logical_and(mask,mask2).astype(np.uint8)
 
